@@ -64,7 +64,7 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
 def featured_products(request):
     """Get featured products (latest 8 products)"""
     products = Product.objects.filter(is_active=True)[:8]
-    serializer = ProductListSerializer(products, many=True)
+    serializer = ProductListSerializer(products, many=True,context={'request':request})
     return Response(serializer.data)
 
 @api_view(['GET'])

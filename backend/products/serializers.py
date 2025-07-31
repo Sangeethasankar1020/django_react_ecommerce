@@ -39,3 +39,8 @@ class ProductListSerializer(serializers.ModelSerializer):
             'id', 'name', 'price', 'category_name', 'image', 
             'stock', 'is_active', 'is_in_stock'
         ]
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if obj.image and hasattr(obj.image, 'url'):
+            return request.build_absolute_uri(obj.image.url) if request else obj.image.url
+        return None

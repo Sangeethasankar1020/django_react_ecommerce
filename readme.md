@@ -199,13 +199,13 @@ The application will be available at:
 
 ### Admin User
 
-- Email: piemahesh@gmail.com
-- Password: mahesh123
+- Email: admin@example.com
+- Password: admin123
 
 ### Customer User
 
-- Email: ocenmahesh@gmail.com
-- Password: mahesh123
+- Email: customer@example.com
+- Password: customer123
 
 ## Testing
 

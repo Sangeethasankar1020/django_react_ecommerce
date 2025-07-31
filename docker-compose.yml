@@ -1,16 +1,4 @@
-
 services:
-  db:
-    image: postgres:13
-    environment:
-      POSTGRES_DB: ecommerce_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-
   redis:
     image: redis:7-alpine
     ports:
@@ -27,11 +15,9 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
       - redis
     environment:
       - DEBUG=True
-      - DB_HOST=db
       - REDIS_URL=redis://redis:6379/0
 
   celery:
@@ -40,11 +26,9 @@ services:
     volumes:
       - ./backend:/app
     depends_on:
-      - db
       - redis
     environment:
       - DEBUG=True
-      - DB_HOST=db
       - REDIS_URL=redis://redis:6379/0
 
   frontend:
@@ -56,6 +40,3 @@ services:
       - /app/node_modules
     environment:
       - REACT_APP_API_URL=http://localhost:8000/api
-
-volumes:
-  postgres_data:
